@@ -1,0 +1,62 @@
+!!! Strict
+%html
+  %head
+    %title Annuaire des praticiens Agiles
+    %link{:rel=>"stylesheet", :type=>'text/css', :href=>"assets/site.css"}
+    %link{:rel=>"stylesheet", :type=>'text/css', :href=>"assets/grid.css"}
+  %body
+    #wrap
+      #header-wrap
+        #header
+          %h1#logo
+            %a{:href=>"http://referentiel.institut-agile.fr/"}
+              Institut
+              %span.green Agile
+          %h2#slogan
+            Une informatique plus humaine et plus efficace...
+          %ul
+            %li
+              %a{:href=>"http://institut-agile.fr/"}
+                %span
+                  L'Institut
+            %li#current
+              %a{:href=>"http://referentiel.institut-agile.fr/"}
+                %span
+                  Les pratiques agiles
+            %li
+              %a{:href=>"http://blog.institut-agile.fr/"}
+                %span
+                  Le blog
+      %img.header-photo{:src=>"assets/headerphoto.jpg", :width=>"820", :height=>"120"}
+
+      #content
+        .container_10.clearfix
+          .grid_7
+            = yield
+          .grid_2
+            #sidebar
+              &nbsp;
+            #status
+              &nbsp;
+
+    <script type="text/javascript">
+    (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/XOcYOECsnbd4w993r6F52Q.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    })();
+    </script>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16190038-1']);
+    _gaq.push(['_setDomainName', '.institut-agile.fr']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <script type="text/javascript">
+    $("#status").load("/status")
+    </script>

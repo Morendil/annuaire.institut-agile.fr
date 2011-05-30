@@ -13,6 +13,12 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /an asset file/
+      '/assets/site.css'
+
+    when /a missing page/
+      '/this/will_be_a_404'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
