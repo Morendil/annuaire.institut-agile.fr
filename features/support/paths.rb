@@ -19,6 +19,12 @@ module NavigationHelpers
     when /a missing page/
       '/this/will_be_a_404'
 
+    when /the status pagelet/
+      '/status'
+
+    when /the login redirect/
+      '/login'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
