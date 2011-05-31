@@ -25,6 +25,9 @@ module NavigationHelpers
     when /the login redirect/
       '/login'
 
+    when /the callback page/
+      '/done'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

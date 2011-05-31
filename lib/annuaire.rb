@@ -1,16 +1,19 @@
 require 'sinatra/base'
 
+require './lib/person.rb'
+require './lib/registration.rb'
+
 class Annuaire < Sinatra::Base
   get '/' do
     haml 'Bienvenue dans l\'annuaire des praticiens Agiles!'
   end
 
-  get '/login' do
-    redirect 'http://linkedin.com'
-  end
-
   get '/status' do
-    haml :notlogged, :layout => false
+    template = profile ? :logged : :notlogged
+    who = Person.get(profile.id) if profile
+    r = haml template, :layout => false
+    r += "\nInscrivez-vous" if profile && !who
+    r
   end
 
   get '/assets/*' do |file|
@@ -20,5 +23,5 @@ class Annuaire < Sinatra::Base
   not_found do
     haml "Page introuvable"
   end
-  
+
 end
