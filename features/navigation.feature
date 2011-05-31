@@ -1,4 +1,4 @@
-Feature: Home page
+Feature: Basic navigation
   As a new visitor
   I want to be met with a greeting of some sort
   And I want the site's navigation to be consistent
