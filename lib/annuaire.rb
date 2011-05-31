@@ -10,7 +10,7 @@ class Annuaire < Sinatra::Base
   end
 
   get '/status' do
-    haml :notlogged
+    haml :notlogged, :layout => false
   end
 
   get '/assets/*' do |file|
