@@ -4,16 +4,12 @@ require './lib/person.rb'
 require './lib/registration.rb'
 
 class Annuaire < Sinatra::Base
+
+  use Rack::Session::Pool, :expire_after => 60 * 60
+  set :session_secret, ENV['session_secret']
+
   get '/' do
     haml 'Bienvenue dans l\'annuaire des praticiens Agiles!'
-  end
-
-  get '/status' do
-    template = profile ? :logged : :notlogged
-    who = Person.get(profile.id) if profile
-    r = haml template, :layout => false
-    r += "\nInscrivez-vous" if profile && !who
-    r
   end
 
   get '/assets/*' do |file|

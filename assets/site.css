@@ -330,6 +330,7 @@ fieldset table {
 }
 /* Forms */
 fieldset {
+	position: relative;
 	border: 1px solid #2f6fab;
 	margin: 1em 0 1em 0;
 	padding: 0 1em 1em;
@@ -354,6 +355,13 @@ textarea {
 select {
 	vertical-align: top;
 }
+label {
+  float:left;
+  width:50%;
+  margin-right:0.5em;
+  text-align:right;
+  font-weight:bold;
+  }
 /* Table of Contents */
 #toc,
 .toc,

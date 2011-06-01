@@ -1,0 +1,13 @@
+%form{ :action => "/register", :method => "post"}
+  %fieldset
+    %legend Inscription
+    %label{:for => "first_name"} Prénom:
+    %input{:disabled => true, :type => "text", :name => "first_name", :value=>profile.first_name}
+    %br
+    %label{:for => "last_name"} Nom:
+    %input{:disabled => true, :type => "text", :name => "last_name", :value => profile.last_name}
+    %br
+    %label{:for => "agree"} J'autorise l'Institut Agile à enregistrer ces informations:
+    %input{:type => "checkbox", :name => "agree", :checked => true }
+    %br
+    %input{:type => "submit", :value => "OK", :class => "button", :id=>"finish"}

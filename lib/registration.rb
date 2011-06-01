@@ -4,6 +4,25 @@ require 'cgi'
 
 class Annuaire < Sinatra::Base
 
+  get '/register' do
+    haml :register
+  end
+
+  post '/register' do
+    Person.create(
+      :id=>profile.id,
+      :first_name=>profile.first_name,
+      :last_name=>profile.last_name) 
+    haml :registered
+  end
+
+  get '/status' do
+    template = profile ? :logged : :notlogged
+    who = Person.get(profile.id) if profile
+    template = :invite if profile && !who
+    haml template, :layout => false
+  end
+
   get '/login' do
     session.delete(:profile)
     response.delete_cookie("oauth")
