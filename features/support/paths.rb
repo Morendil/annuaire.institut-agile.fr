@@ -31,6 +31,9 @@ module NavigationHelpers
     when /the registration page/
       '/register'
 
+    when /the profile page/
+      '/profile'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

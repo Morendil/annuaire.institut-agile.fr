@@ -24,6 +24,18 @@ Given /^that I have authorized LinkedIn as "([^"]*)"/ do |who|
   Annuaire.any_instance.stubs(:retrieve_profile).returns(profile)
 end
 
+Given /^that I am registered as "([^"]*)"/ do |who|
+  who = who.gsub(" ","")
+  doc = Nokogiri::XML(File.read("features/data/#{who}.xml"))
+  profile = LinkedIn::Profile.new(doc)
+  Annuaire.any_instance.stubs(:retrieve_profile).returns(profile)
+  Person.create(
+    :id=>profile.id,
+    :first_name=>profile.first_name,
+    :last_name=>profile.last_name)
+end
+
+
 Then /^I should be redirected within "([^"]*)"/ do |url|
   requested_url = page.driver.request.env['SERVER_NAME']
   requested_url.should match url

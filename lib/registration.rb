@@ -26,7 +26,7 @@ class Annuaire < Sinatra::Base
   get '/login' do
     session.delete(:profile)
     response.delete_cookie("oauth")
-    callback = to(callback(request.referrer))
+    callback = to(callback(request.referrer || "/"))
     client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
     result = client.request_token :oauth_callback => callback 
     session[:oauth]=result

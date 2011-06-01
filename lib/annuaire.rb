@@ -9,7 +9,11 @@ class Annuaire < Sinatra::Base
   set :session_secret, ENV['session_secret']
 
   get '/' do
-    haml 'Bienvenue dans l\'annuaire des praticiens Agiles!'
+    haml :index
+  end
+
+  get '/profile' do
+    haml :profile
   end
 
   get '/assets/*' do |file|
