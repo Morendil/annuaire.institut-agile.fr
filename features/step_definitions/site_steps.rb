@@ -12,9 +12,12 @@ Then /^(?:|I )should see "([^\"]*)" in input "([^\"]*)"$/ do |text, selector|
 end
 
 Given /^that I am not connected$/ do
+  Annuaire.any_instance.unstub(:retrieve_profile)
 end
 
 Given /^that I am not registered$/ do
+  person = Person.get("p4sWv6Bm4e")
+  person.destroy if person
 end
 
 Given /^that I have authorized LinkedIn as "([^"]*)"/ do |who|
