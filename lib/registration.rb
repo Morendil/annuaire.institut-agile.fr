@@ -16,6 +16,10 @@ class Annuaire < Sinatra::Base
     haml :registered
   end
 
+  get '/notlogged' do
+    haml :notlogged
+  end
+
   get '/status' do
     template = profile ? :logged : :notlogged
     who = Person.get(profile.id) if profile

@@ -13,6 +13,7 @@ class Annuaire < Sinatra::Base
   end
 
   get '/profile' do
+    redirect '/notlogged' if !profile
     haml :profile
   end
 
