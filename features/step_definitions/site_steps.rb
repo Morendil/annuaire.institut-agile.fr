@@ -1,6 +1,5 @@
 require 'mocha'
-require 'linkedin'
-require 'nokogiri'
+require './test/helpers'
 
 Then /^(?:|I )should see "([^\"]*)" in input "([^\"]*)"$/ do |text, selector| 
   selector = "//input[@name='#{selector}']/@value"
@@ -21,16 +20,12 @@ Given /^that I am not registered$/ do
 end
 
 Given /^that I have authorized LinkedIn as "([^"]*)"/ do |who|
-  who = who.gsub(" ","")
-  doc = Nokogiri::XML(File.read("features/data/#{who}.xml"))
-  profile = LinkedIn::Profile.new(doc)
+  profile = profile_for who
   Directory.any_instance.stubs(:retrieve_profile).returns(profile)
 end
 
 Given /^that I am registered as "([^"]*)"/ do |who|
-  who = who.gsub(" ","")
-  doc = Nokogiri::XML(File.read("features/data/#{who}.xml"))
-  profile = LinkedIn::Profile.new(doc)
+  profile = profile_for who
   Directory.any_instance.stubs(:retrieve_profile).returns(profile)
   Person.create(
     :id=>profile.id,
@@ -39,7 +34,7 @@ Given /^that I am registered as "([^"]*)"/ do |who|
 end
 
 Given /^that there is a person "([^"]*)", "([^"]*)"/ do |first,last|
-  Person.create(:first_name=>first,:last_name=>last)
+  Person.create(:id=>(first+last).hash,:first_name=>first,:last_name=>last)
 end
 
 Then /^I should be redirected within "([^"]*)"/ do |url|

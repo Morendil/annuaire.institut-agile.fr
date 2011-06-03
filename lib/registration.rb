@@ -9,10 +9,7 @@ class Directory < Sinatra::Base
   end
 
   post '/register' do
-    Person.create(
-      :id=>profile.id,
-      :first_name=>profile.first_name,
-      :last_name=>profile.last_name) 
+    register(profile).save
     haml :registered
   end
 
@@ -73,6 +70,14 @@ class Directory < Sinatra::Base
 
   def callback from
     "/done?backto=#{CGI::escape(from)}"
+  end
+
+ def register profile
+     Person.new(
+      :id=>profile.id,
+      :first_name=>profile.first_name,
+      :last_name=>profile.last_name,
+      :since=>Time.now)
   end
 
 end

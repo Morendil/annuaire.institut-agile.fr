@@ -6,4 +6,5 @@ class Person
   property :id,		String,	:key => true
   property :first_name,	String
   property :last_name,	String
+  property :since,	DateTime
 end
