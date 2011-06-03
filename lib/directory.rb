@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'haml'
+require 'sinatra/mustache'
 
 require './lib/person.rb'
 require './lib/registration.rb'
@@ -16,6 +17,12 @@ class Directory < Sinatra::Base
   get '/profile' do
     redirect '/notlogged' if !profile
     haml :profile
+  end
+
+  get '/persons' do
+    redirect '/notlogged' if !profile
+    @values = Person.all 
+    haml (mustache :persons)
   end
 
   get '/assets/*' do |file|

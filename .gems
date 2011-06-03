@@ -1,5 +1,7 @@
 sinatra
 haml
+mustache
+sinatra-mustache
 linkedin
 datamapper
 dm-postgres-adapter

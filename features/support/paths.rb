@@ -34,6 +34,9 @@ module NavigationHelpers
     when /the profile page/
       '/profile'
 
+    when /the list page/
+      '/persons'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
