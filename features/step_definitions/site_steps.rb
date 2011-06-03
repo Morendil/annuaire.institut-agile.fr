@@ -12,7 +12,7 @@ Then /^(?:|I )should see "([^\"]*)" in input "([^\"]*)"$/ do |text, selector|
 end
 
 Given /^that I am not connected$/ do
-  Annuaire.any_instance.unstub(:retrieve_profile)
+  Directory.any_instance.unstub(:retrieve_profile)
 end
 
 Given /^that I am not registered$/ do
@@ -24,20 +24,23 @@ Given /^that I have authorized LinkedIn as "([^"]*)"/ do |who|
   who = who.gsub(" ","")
   doc = Nokogiri::XML(File.read("features/data/#{who}.xml"))
   profile = LinkedIn::Profile.new(doc)
-  Annuaire.any_instance.stubs(:retrieve_profile).returns(profile)
+  Directory.any_instance.stubs(:retrieve_profile).returns(profile)
 end
 
 Given /^that I am registered as "([^"]*)"/ do |who|
   who = who.gsub(" ","")
   doc = Nokogiri::XML(File.read("features/data/#{who}.xml"))
   profile = LinkedIn::Profile.new(doc)
-  Annuaire.any_instance.stubs(:retrieve_profile).returns(profile)
+  Directory.any_instance.stubs(:retrieve_profile).returns(profile)
   Person.create(
     :id=>profile.id,
     :first_name=>profile.first_name,
     :last_name=>profile.last_name)
 end
 
+Given /^that there is a person "([^"]*)", "([^"]*)"/ do |first,last|
+  Person.create(:first_name=>first,:last_name=>last)
+end
 
 Then /^I should be redirected within "([^"]*)"/ do |url|
   requested_url = page.driver.request.env['SERVER_NAME']

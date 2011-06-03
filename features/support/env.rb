@@ -4,7 +4,7 @@ require 'dm-migrations'
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'lib/annuaire.rb')
+require File.join(File.dirname(__FILE__), '..', '..', 'lib/directory.rb')
 
 DataMapper.setup(:default, 'sqlite::memory:')
 DataMapper.auto_migrate!
@@ -13,14 +13,14 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = Annuaire
+Capybara.app = Directory
 
-class AnnuaireWorld
+class DirectoryWorld
   include Capybara
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-  AnnuaireWorld.new
+  DirectoryWorld.new
 end

@@ -1,9 +1,10 @@
 require 'sinatra/base'
+require 'haml'
 
 require './lib/person.rb'
 require './lib/registration.rb'
 
-class Annuaire < Sinatra::Base
+class Directory < Sinatra::Base
 
   use Rack::Session::Pool, :expire_after => 60 * 60
   set :session_secret, ENV['session_secret']

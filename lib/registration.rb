@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'linkedin'
 require 'cgi'
 
-class Annuaire < Sinatra::Base
+class Directory < Sinatra::Base
 
   get '/register' do
     haml :register

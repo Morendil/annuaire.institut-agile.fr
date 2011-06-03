@@ -1,15 +1,15 @@
 require 'test/unit'
 require 'rack/test'
 
-require 'lib/annuaire.rb'
+require 'lib/directory.rb'
 
 ENV['RACK_ENV'] = 'test'
 
-class AnnuaireTest < Test::Unit::TestCase
+class DirectoryTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    Annuaire
+    Directory
   end
 
   def test_callback
