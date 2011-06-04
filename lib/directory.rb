@@ -33,7 +33,7 @@ class Directory < Sinatra::Base
   end
 
   not_found do
-    haml :404
+    haml :notfound
   end
 
 end
