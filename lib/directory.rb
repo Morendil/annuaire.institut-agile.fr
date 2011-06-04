@@ -33,7 +33,7 @@ class Directory < Sinatra::Base
   end
 
   not_found do
-    haml "Page introuvable"
+    haml :404
   end
 
 end
