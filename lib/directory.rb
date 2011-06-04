@@ -22,7 +22,10 @@ class Directory < Sinatra::Base
   get '/persons' do
     redirect '/notlogged' if !profile
     @values = Person.all 
-    haml (mustache :persons)
+    expanded = mustache :persons
+    # workaround for a Sinatra bug
+    @default_layout = nil
+    haml expanded
   end
 
   get '/assets/*' do |file|
