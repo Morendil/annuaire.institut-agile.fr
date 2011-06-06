@@ -10,6 +10,11 @@ class Directory < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60 * 60
   set :session_secret, ENV['session_secret']
 
+  # Workaround for a bug hindering "template chaining" (see below)
+  def render(engine, data, options={}, locals={}, &block)
+    super.tap {@default_layout = nil}
+  end
+
   get '/' do
     haml :index
   end
@@ -22,10 +27,7 @@ class Directory < Sinatra::Base
   get '/persons' do
     redirect '/notlogged' if !profile
     @values = Person.all 
-    expanded = mustache :persons
-    # workaround for a Sinatra bug
-    @default_layout = nil
-    haml expanded
+    haml (mustache :persons)
   end
 
   get '/assets/*' do |file|
