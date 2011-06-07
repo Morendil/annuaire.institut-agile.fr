@@ -35,8 +35,8 @@ class Directory < Sinatra::Base
   end
 
   get '/done' do
-    retrieve_profile
     where = params[:backto] || "/"
+    redirect '/notlogged' if !profile
     redirect to(where)
   end
 
