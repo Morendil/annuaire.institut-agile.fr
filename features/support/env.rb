@@ -5,6 +5,7 @@ require 'dm-migrations'
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', '..', 'lib/directory.rb')
+require File.join(File.dirname(__FILE__), '..', '..', 'lib/roadmap.rb')
 
 DataMapper.setup(:default, 'sqlite::memory:')
 DataMapper.auto_migrate!

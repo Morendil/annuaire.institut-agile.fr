@@ -1,0 +1,18 @@
+Mon profil:<br/>
+= profile.first_name
+= profile.last_name
+
+<br/>
+J'utilise...
+.practices
+  %ul
+  {{#experiences}}
+    %li {{title}}
+  {{/experiences}}
+%form#add{:method =>:post, :action => '/profile/add'}
+  %select{:name =>:practice}
+    {{#practices}}
+    %option{:value =>:{{id}}} {{title}}
+    {{/practices}}
+  %input{:type=>:submit,:id=>:addit,:value=>"Ajouter"}
+<br/>

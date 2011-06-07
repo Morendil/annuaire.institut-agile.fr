@@ -1,6 +1,12 @@
 require 'mocha'
 require './test/helpers'
 
+After do
+  Person.all.experiences.destroy
+  Person.all.destroy
+  Roadmap.clear
+end
+
 Then /^(?:|I )should see "([^\"]*)" in input "([^\"]*)"$/ do |text, selector| 
   selector = "//input[@name='#{selector}']/@value"
   if page.respond_to? :should
@@ -15,22 +21,32 @@ Given /^that I am not connected$/ do
 end
 
 Given /^that I am not registered$/ do
-  person = Person.get("p4sWv6Bm4e")
+  person = Person.get(@profile.id) if @profile
   person.destroy if person
 end
 
 Given /^that I have authorized LinkedIn as "([^"]*)"/ do |who|
-  profile = profile_for who
-  Directory.any_instance.stubs(:retrieve_profile).returns(profile)
+  @profile = profile_for who
+  Directory.any_instance.stubs(:retrieve_profile).returns(@profile)
 end
 
 Given /^that I am registered as "([^"]*)"/ do |who|
-  profile = profile_for who
-  Directory.any_instance.stubs(:retrieve_profile).returns(profile)
+  @profile = profile_for who
+  Directory.any_instance.stubs(:retrieve_profile).returns(@profile)
+  Person.get(@profile.id).destroy if Person.get(@profile.id)
   Person.create(
-    :id=>profile.id,
-    :first_name=>profile.first_name,
-    :last_name=>profile.last_name)
+    :id=>@profile.id,
+    :first_name=>@profile.first_name,
+    :last_name=>@profile.last_name)
+end
+
+Given /^that there is a practice "([^"]*)" with title "([^"]*)"$/ do |id, title|
+  Roadmap.add({"id"=>id,"title"=>title})
+end
+
+Given /^that I have added experience with "([^"]*)"$/ do |id|
+  person = Person.get(@profile.id) 
+  person.experiences.create(:practice => "stories") 
 end
 
 Given /^that there is a person "([^"]*)", "([^"]*)"/ do |first,last|

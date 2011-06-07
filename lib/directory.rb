@@ -1,27 +1,31 @@
 require 'sinatra/base'
 require 'haml'
-require 'sinatra/mustache'
+require 'mustache'
 
+require './lib/rendering.rb'
 require './lib/person.rb'
 require './lib/registration.rb'
+require './lib/roadmap.rb'
 
 class Directory < Sinatra::Base
 
   use Rack::Session::Pool, :expire_after => 60 * 60
   set :session_secret, ENV['session_secret']
 
-  # Workaround for a bug hindering "template chaining" (see below)
-  def render(engine, data, options={}, locals={}, &block)
-    super.tap {@default_layout = nil}
-  end
-
   get '/' do
     haml :index
   end
 
+  post '/profile/add' do
+    Person.get(profile.id).experiences.create(:practice=>params[:practice])
+    redirect '/profile'
+  end
+
   get '/profile' do
-    redirect '/notlogged' if !profile
-    haml :profile
+    redirect '/notlogged' if !profile || !Person.get(profile.id)
+    @experiences = Person.get(profile.id).experiences
+    @practices = Roadmap.all
+    haml (mustache :profile)
   end
 
   get '/persons' do

@@ -1,4 +1,5 @@
 require 'dm-core'
+require './lib/experience'
 
 class Person
   include DataMapper::Resource
@@ -7,4 +8,6 @@ class Person
   property :first_name,	String
   property :last_name,	String
   property :since,	DateTime
+
+  has n,   :experiences
 end
