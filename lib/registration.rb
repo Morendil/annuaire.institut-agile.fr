@@ -47,18 +47,13 @@ class Directory < Sinatra::Base
 
   def retrieve_profile
     cookie = request.cookies["oauth"]
-p cookie
     tokens = session.delete(:oauth)
-p tokens
     return unless cookie || tokens
     begin
       client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
-p client
       connect_client client, cookie, tokens
-p client.profile
-      client.profile :public => true
+      return client.profile :public => true
     rescue Exception => e
-p e
     end
   end
 
