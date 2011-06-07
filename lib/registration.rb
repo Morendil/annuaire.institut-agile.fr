@@ -35,7 +35,9 @@ class Directory < Sinatra::Base
   end
 
   get '/done' do
+p "done"
     retrieve_profile
+p profile
     where = params[:backto] || "/"
     redirect to(where)
   end
