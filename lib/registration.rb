@@ -35,9 +35,7 @@ class Directory < Sinatra::Base
   end
 
   get '/done' do
-p "done"
     retrieve_profile
-p profile
     where = params[:backto] || "/"
     redirect to(where)
   end
@@ -49,13 +47,18 @@ p profile
 
   def retrieve_profile
     cookie = request.cookies["oauth"]
+p cookie
     tokens = session.delete(:oauth)
+p tokens
     return unless cookie || tokens
     begin
       client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
+p client
       connect_client client, cookie, tokens
+p client.profile
       client.profile :public => true
-    rescue
+    rescue Exception => e
+p e
     end
   end
 
