@@ -12,7 +12,12 @@ class Directory < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60 * 60
   set :session_secret, ENV['session_secret']
 
+  before do
+    cache_control :no_cache
+  end
+
   get '/' do
+    expires 500, :public, :must_revalidate
     haml :index
   end
 
@@ -35,6 +40,7 @@ class Directory < Sinatra::Base
   end
 
   get '/assets/*' do |file|
+    expires 500, :public, :must_revalidate
     send_file File.join('.',request.path)
   end
 
