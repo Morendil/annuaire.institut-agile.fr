@@ -12,7 +12,7 @@ J'utilise...
 %form#add{:method =>:post, :action => '/profile/add'}
   %select{:name =>:practice}
     {{#practices}}
-    %option{:value =>:{{id}}} {{title}}
+    %option{:value =>"{{id}}"} {{title}}
     {{/practices}}
   %input{:type=>:submit,:id=>:addit,:value=>"Ajouter"}
 <br/>
