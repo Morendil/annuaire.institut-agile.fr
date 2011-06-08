@@ -10,7 +10,7 @@ Feature: Agile Practices
   Scenario: List practices on profile page
     Given that I have added experience with "stories"
     When I go to the profile page
-    Then I should see "J'utilise..." 
+    Then I should see "Mes pratiques" 
     And I should see "User Stories" within ".practices"
 
   Scenario: Add practice
