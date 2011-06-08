@@ -1,5 +1,8 @@
+require 'json'
+require 'net/http'
+
 class Roadmap
-  @practices = []
+  @practices = JSON.parse(Net::HTTP.get("referentiel.institut-agile.fr","/index_json"))
   def self.add practice
     @practices << practice
   end
