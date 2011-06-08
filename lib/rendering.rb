@@ -43,7 +43,8 @@ module Tilt
       locals[:yield] = block.nil? ? '' : yield
       locals[:content] = locals[:yield]
 
-      @output = ::Mustache.render(template, locals)
+      # Force encoding to work around a bug in tilt 1.2.2
+      @output = ::Mustache.render(template.force_encoding("UTF-8"), locals)
     end
   end
   register 'mustache', MustacheTemplate
