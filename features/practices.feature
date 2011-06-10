@@ -13,7 +13,7 @@ Feature: Agile Practices
     Then I should see "Mes pratiques" 
     And I should see "User Stories" within ".practices"
 
-  Scenario: Add practice
+  Scenario: Add an experience
     When I go to the profile page
     And I select "User Stories" from "practice" within "#add"
     And I press "addit" within "#add"
