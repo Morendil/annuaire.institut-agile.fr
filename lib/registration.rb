@@ -21,7 +21,7 @@ class Directory < Sinatra::Base
     template = profile ? :logged : :notlogged
     who = Person.get(profile.id) if profile
     template = :invite if profile && !who
-    haml template, :layout => false
+    haml template, :layout => !request.xhr?
   end
 
   get '/login' do
@@ -61,7 +61,11 @@ class Directory < Sinatra::Base
     response.delete_cookie("oauth")
     client.authorize_from_access(*cookie.split("&")) if cookie
     cookie = authorize(client,tokens) if tokens
-    response.set_cookie("oauth", cookie) if cookie
+    response.set_cookie(
+      "oauth",
+      {:domain=>"institut-agile.fr",
+       :path=>"/",
+       :value=>cookie}) if cookie
   end
 
   def authorize client, t

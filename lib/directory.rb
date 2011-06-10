@@ -27,7 +27,8 @@ class Directory < Sinatra::Base
   end
 
   get '/profile' do
-    redirect '/notlogged' if !profile || !Person.get(profile.id)
+    redirect '/notlogged' if !profile 
+    redirect '/status' if !Person.get(profile.id)
     @experiences = Person.get(profile.id).experiences
     @practices = Roadmap.all
     haml (mustache :profile)
