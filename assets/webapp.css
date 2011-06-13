@@ -1,0 +1,18 @@
+.editable {
+  position: relative;
+}
+
+.edit form {
+  display: inline-block;
+}
+
+.editable .edit {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.editable:hover, .editable:focus {
+	background-color: #f9f9f9;
+}

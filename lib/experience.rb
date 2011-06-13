@@ -6,6 +6,7 @@ class Experience
   belongs_to :person
 
   property :id,		Serial
+  property :type,	String
   property :practice,	String
 
   def title

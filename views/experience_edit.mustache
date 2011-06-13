@@ -1,0 +1,6 @@
+<br/>
+<br/>
+%form#edit{:method =>:post, :action => '/profile/edit/{{instance.id}}'}
+  = select_tag :name =>:practice, :values=>@practices, :instance=>@instance
+  %input{:type=>:submit,:id=>:change,:value=>"Modifier"}
+<br/>

@@ -6,6 +6,7 @@ require './lib/rendering.rb'
 require './lib/person.rb'
 require './lib/registration.rb'
 require './lib/roadmap.rb'
+require './lib/helpers.rb'
 
 class Directory < Sinatra::Base
 
@@ -22,7 +23,27 @@ class Directory < Sinatra::Base
   end
 
   post '/profile/add' do
-    Person.get(profile.id).experiences.create(:practice=>params[:practice])
+    current_user.experiences.create(
+      :practice=>params[:practice],
+      :type=>params[:type])
+    redirect '/profile'
+  end
+
+  get '/profile/edit/:id' do |id|
+    @practices = Roadmap.options
+    @instance = current_user.experiences.get(id)
+    haml (mustache :experience_edit), :layout => !request.xhr?
+  end
+
+  post '/profile/edit/:id' do |id|
+    current_user.experiences.get(id).update(
+      :practice=>params[:practice],
+      :type=>params[:type])
+    redirect '/profile'
+  end
+
+  post '/profile/delete/:id' do |id|
+    current_user.experiences.get(id).destroy
     redirect '/profile'
   end
 
@@ -30,7 +51,7 @@ class Directory < Sinatra::Base
     redirect '/notlogged' if !profile 
     redirect '/status' if !Person.get(profile.id)
     @experiences = Person.get(profile.id).experiences
-    @practices = Roadmap.all
+    @practices = Roadmap.options
     haml (mustache :profile)
   end
 

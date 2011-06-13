@@ -7,12 +7,14 @@ Mes pratiques et compétences agiles:
 .practices
   %ul
   {{#experiences}}
-    %li {{title}}
+    %li#exp_{{id}}.editable
+      {{title}}
+      %span.edit
+        <a onClick="$('li#exp_{{id}}').load('/profile/edit/{{id}}');">(modif.)</a>
+        <a onClick="$.post('/profile/delete/{{id}}',function(){$('li#exp_{{id}}').remove();})">(suppr.)</a>
   {{/experiences}}
-%form#add{:method =>:post, :action => '/profile/add'}
-  %select{:name =>:practice}
-    {{#practices}}
-    %option{:value =>"{{id}}"} {{title}}
-    {{/practices}}
-  %input{:type=>:submit,:id=>:addit,:value=>"Ajouter"}
-<br/>
+
+{{> experience_add}}
+<script type="text/javascript">
+$(".editable").hover(function() {$(".edit",this).show();},function() {$(".edit",this).hide();});
+</script>

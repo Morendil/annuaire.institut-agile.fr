@@ -12,6 +12,9 @@ class Roadmap
   def self.all
     @practices
   end
+  def self.options
+    @practices.map {|each| [each["id"], each["title"]]}
+  end
   def self.clear
     @practices = []
   end

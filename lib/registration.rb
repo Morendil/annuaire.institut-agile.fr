@@ -40,6 +40,10 @@ class Directory < Sinatra::Base
     redirect to(where)
   end
 
+  def current_user
+    Person.get(profile.id)
+  end
+
   def profile
     return @profile = session[:profile] if session[:profile]
     @profile = session[:profile] = retrieve_profile
