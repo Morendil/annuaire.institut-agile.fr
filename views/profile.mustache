@@ -7,11 +7,7 @@ Mes pratiques et compétences agiles:
 .practices
   %ul
   {{#experiences}}
-    %li#exp_{{id}}.editable
-      {{title}}
-      %span.edit
-        <a onClick="$('li#exp_{{id}}').load('/profile/edit/{{id}}');">(modif.)</a>
-        <a onClick="$.post('/profile/delete/{{id}}',function(){$('li#exp_{{id}}').remove();})">(suppr.)</a>
+    {{> experience_show}}
   {{/experiences}}
 
 {{> experience_add}}

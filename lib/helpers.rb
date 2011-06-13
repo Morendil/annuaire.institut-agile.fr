@@ -13,3 +13,15 @@ def select_tag_option each, current
   selected = "selected='selected' " if current == each[0]
   "<option #{selected}value='#{each[0]}'>#{each[1]}</option>"
 end
+
+def editLink replace, url, label
+  "<a onclick=\"$('#{replace}').load('#{url}');\">#{label}</a>"
+end
+
+def deleteLink replace, url, label
+  "<a onclick=\"$.post('#{url}',function(){$('#{replace}').remove();})\">#{label}</a>"
+end
+
+def cancelLink replace, url, label
+  "<a onclick=\"$('#{replace}').load('#{url}');\">#{label}</a>"
+end

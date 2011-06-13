@@ -35,6 +35,13 @@ class Directory < Sinatra::Base
     haml (mustache :experience_edit), :layout => !request.xhr?
   end
 
+  get '/profile/show/:id' do |id|
+    @instance = current_user.experiences.get(id)
+    @id = @instance.id
+    @title = @instance.title
+    haml (mustache :experience_show), :layout => !request.xhr?
+  end
+
   post '/profile/edit/:id' do |id|
     current_user.experiences.get(id).update(
       :practice=>params[:practice],
