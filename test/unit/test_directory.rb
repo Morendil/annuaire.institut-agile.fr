@@ -4,7 +4,7 @@ require 'rack/test'
 
 require 'test/helpers'
 require 'lib/directory.rb'
-
+require 'lib/experience.rb'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -35,4 +35,5 @@ class DirectoryTest < Test::Unit::TestCase
     # Because we have a layout file...
     assert_not_equal "foo", get('/foo').body.strip
   end
+
 end
