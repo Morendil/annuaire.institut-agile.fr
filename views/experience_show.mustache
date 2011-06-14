@@ -1,5 +1,7 @@
 %li#exp_{{id}}.editable
   {{type_label}} : {{title}}
+  .observed
+    {{observed}}
   %span.edit
     = editLink "li#exp_{{id}}", "/profile/edit/{{id}}", "(modif.)"
     = deleteLink "li#exp_{{id}}", "/profile/delete/{{id}}", "(suppr.)"

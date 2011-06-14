@@ -26,7 +26,8 @@ class Directory < Sinatra::Base
   post '/profile/add' do
     current_user.experiences.create(
       :practice=>params[:practice],
-      :type=>params[:type])
+      :type=>params[:type],
+      :observed=>params[:observed])
     redirect '/profile'
   end
 
@@ -42,13 +43,15 @@ class Directory < Sinatra::Base
     @id = @instance.id
     @title = @instance.title
     @type_label = @instance.type_label
+    @observed = @instance.observed
     haml (mustache :experience_show), :layout => !request.xhr?
   end
 
   post '/profile/edit/:id' do |id|
     current_user.experiences.get(id).update(
       :practice=>params[:practice],
-      :type=>params[:type])
+      :type=>params[:type],
+      :observed=>params[:observed])
     redirect '/profile'
   end
 

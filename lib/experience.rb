@@ -8,6 +8,7 @@ class Experience
   property :id,		Serial
   property :type,	String
   property :practice,	String
+  property :observed,	Text
 
   @@types = nil
 
