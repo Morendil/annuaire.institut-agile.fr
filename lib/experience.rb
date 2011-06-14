@@ -9,7 +9,18 @@ class Experience
   property :type,	String
   property :practice,	String
 
+  @@types = nil
+
   def title
     Roadmap.find(@practice)["title"]
+  end
+  
+  def self.types
+    @@types || @@types = File.open("views/types.yml") {|f| YAML::load(f)}  
+  end
+
+  def type_label
+    which = Experience.types.find {|e| e[0]==@type} 
+    which[1]
   end
 end

@@ -46,7 +46,7 @@ end
 
 Given /^that I have added experience with "([^"]*)"$/ do |id|
   person = Person.get(@profile.id) 
-  person.experiences.create(:practice => "stories") 
+  person.experiences.create(:practice => "stories", :type=>"learning") 
 end
 
 Given /^that there is a person "([^"]*)", "([^"]*)"/ do |first,last|

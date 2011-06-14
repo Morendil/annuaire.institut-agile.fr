@@ -1,6 +1,8 @@
 <br/>
 <br/>
 %form#add{:method =>:post, :action => '/profile/add'}
+  = select_tag :name =>:type, :values=>@types
+  concernant:
   = select_tag :name =>:practice, :values=>@practices
   %input{:type=>:submit,:id=>:addit,:value=>"Ajouter"}
 <br/>

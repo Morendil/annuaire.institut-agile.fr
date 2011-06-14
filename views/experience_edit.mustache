@@ -1,5 +1,8 @@
 .editable
   %form#edit{:method =>:post, :action => '/profile/edit/{{instance.id}}'}
     = select_tag :name =>:practice, :values=>@practices, :instance=>@instance
-    = cancelLink "li#exp_{{instance.id}}", "/profile/show/{{instance.id}}", "(annul.)"
+    = select_tag :name =>:type, :values=>@types, :instance=>@instance
     %input{:type=>:submit,:id=>:change,:value=>"Modifier"}
+    %span.edit
+      = cancelLink "li#exp_{{instance.id}}", "/profile/show/{{instance.id}}", "(annul.)"
+

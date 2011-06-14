@@ -1,4 +1,5 @@
 sinatra
+yaml
 haml
 mustache
 linkedin

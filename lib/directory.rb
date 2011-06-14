@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'yaml'
 require 'haml'
 require 'mustache'
 
@@ -32,6 +33,7 @@ class Directory < Sinatra::Base
   get '/profile/edit/:id' do |id|
     @practices = Roadmap.options
     @instance = current_user.experiences.get(id)
+    @types = Experience.types
     haml (mustache :experience_edit), :layout => !request.xhr?
   end
 
@@ -39,6 +41,7 @@ class Directory < Sinatra::Base
     @instance = current_user.experiences.get(id)
     @id = @instance.id
     @title = @instance.title
+    @type_label = @instance.type_label
     haml (mustache :experience_show), :layout => !request.xhr?
   end
 
@@ -59,6 +62,7 @@ class Directory < Sinatra::Base
     redirect '/status' if !Person.get(profile.id)
     @experiences = Person.get(profile.id).experiences
     @practices = Roadmap.options
+    @types = Experience.types
     haml (mustache :profile)
   end
 
