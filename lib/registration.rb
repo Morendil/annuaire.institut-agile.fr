@@ -51,7 +51,9 @@ class Directory < Sinatra::Base
 
   def retrieve_profile
     cookie = request.cookies["oauth"]
+p "Cookie:",cookie
     tokens = session.delete(:oauth)
+p "Auth tokens:",tokens
     return unless cookie || tokens
     begin
       client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
@@ -65,6 +67,7 @@ class Directory < Sinatra::Base
     response.delete_cookie("oauth")
     client.authorize_from_access(*cookie.split("&")) if cookie
     cookie = authorize(client,tokens) if tokens
+p "Sending back cookie:",cookie
     response.set_cookie(
       "oauth",
       {:domain=>"institut-agile.fr",
@@ -73,6 +76,7 @@ class Directory < Sinatra::Base
   end
 
   def authorize client, t
+p "Authorizing with token:",t,params[:oauth_verifier]
     client.authorize_from_request(t.token,t.secret,params[:oauth_verifier])
   end
 
