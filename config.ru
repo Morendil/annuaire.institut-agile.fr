@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'datamapper'
+require 'dm-core'
 
 require File.join(File.dirname(__FILE__), 'lib/directory.rb')
 
