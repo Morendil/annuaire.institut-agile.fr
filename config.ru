@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'dm-core'
+require 'dm-migrations'
 
 require File.join(File.dirname(__FILE__), 'lib/directory.rb')
 
