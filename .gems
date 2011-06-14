@@ -3,4 +3,6 @@ haml
 mustache
 linkedin
 datamapper
+dm-core
+dm-migrations
 dm-postgres-adapter
