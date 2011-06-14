@@ -28,8 +28,11 @@ class Directory < Sinatra::Base
     session.delete(:profile)
     response.delete_cookie("oauth")
     callback = to(callback(request.referrer || "/"))
+p "In login, about to create client"
     client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
+p "In login, about to create token"
     result = client.request_token :oauth_callback => callback 
+p "In login, got token"
     session[:oauth]=result
     redirect result.authorize_url
   end
@@ -56,8 +59,11 @@ p "Cookie:",cookie
 p "Auth tokens:",tokens
     return unless cookie || tokens
     begin
+p "In retrieve, about to create client"
       client=LinkedIn::Client.new(ENV['LinkedIn_Key'],ENV['LinkedIn_Secret'])
+p "In retrieve, about to connect"
       connect_client client, cookie, tokens
+p "In retrieve, about to get profile"
       return client.profile :public => true
     rescue Exception => e
     end
