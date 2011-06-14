@@ -64,7 +64,9 @@ p "In retrieve, about to create client"
 p "In retrieve, about to connect"
       connect_client client, cookie, tokens
 p "In retrieve, about to get profile"
-      return client.profile :public => true
+      result = client.profile :public => true
+p "In retrieve, got profile"
+      return result
     rescue Exception => e
     end
   end
